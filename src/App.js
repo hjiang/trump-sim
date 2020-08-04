@@ -46,7 +46,11 @@ function App() {
             withPreview={false}
           />
         ) : (
-          <img className="preview" src={URL.createObjectURL(picture)} />
+          <img
+            className="preview"
+            src={URL.createObjectURL(picture)}
+            alt="preview"
+          />
         )}
       </FileDrop>
       {error !== null && <div className="error">{error}</div>}
