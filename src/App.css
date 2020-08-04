@@ -1,0 +1,34 @@
+.App {
+  text-align: center;
+}
+
+.preview {
+  max-height: 320px;
+}
+
+.result {
+  width: 255px;
+  height: 217px;
+  background-image: url("./trump_says.jpg");
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.result .text {
+  font-size: 26px;
+  font-weight: bold;
+  position: absolute;
+  right: 10px;
+  top: 7px;
+}
+
+.error {
+  color: red;
+}
+
+button {
+  font-size: 12pt;
+  padding: 5px;
+  margin-top: 10px;
+}
