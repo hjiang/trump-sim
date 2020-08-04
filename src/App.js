@@ -69,6 +69,10 @@ function App() {
           <button onClick={reset}>Try again</button>
         </>
       )}
+      <div className="credit">
+        Hosted on <a href="https://netlify.com">Netlify</a> (frontend) and{" "}
+        <a href="https://leancloud.app">LeanCloud</a> (backend).
+      </div>
     </div>
   );
 }
