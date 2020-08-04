@@ -9,11 +9,13 @@ function App() {
   const [picture, setPicture] = useState(null);
   const [error, setError] = useState(null);
   const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const reset = () => {
     setPicture(null);
     setError(null);
     setResult(null);
+    setLoading(false);
   };
 
   const onDrop = pics => {
@@ -21,6 +23,7 @@ function App() {
     setPicture(pic);
     const formData = new FormData();
     formData.append("image", pic, pic.name);
+    setLoading(true);
     axios
       .post("/api/1.0/classify-image", formData)
       .then(res => {
@@ -30,7 +33,10 @@ function App() {
           setError(res.data.message);
         }
       })
-      .catch(setError);
+      .catch(setError)
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -54,6 +60,7 @@ function App() {
         )}
       </FileDrop>
       {error !== null && <div className="error">{error}</div>}
+      {loading && <div className="loading">Loading, please wait ...</div>}
       {result !== null && (
         <>
           <div className="result">

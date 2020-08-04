@@ -25,10 +25,17 @@
 
 .error {
   color: red;
+  font-size: 14pt;
+  margin-top: 10px;
 }
 
 button {
   font-size: 12pt;
   padding: 5px;
+  margin-top: 10px;
+}
+
+.loading {
+  font-size: 14pt;
   margin-top: 10px;
 }
