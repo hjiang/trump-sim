@@ -73,6 +73,8 @@ function App() {
 
   const onDrop = pics => {
     const pic = pics[0];
+    setResult(null);
+    setError(null);
     setPicture(pic);
     setLoading(true);
     resizeImage(pic, 512)
