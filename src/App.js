@@ -101,7 +101,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Person, Woman, Man, Camera, TV classifier</h1>
+      <h1>Person, Woman, Man, Camera, TV</h1>
       <FileDrop onDrop={onDrop}>
         {picture === null ? (
           <ImageUploader
@@ -120,7 +120,11 @@ function App() {
         )}
       </FileDrop>
       {error !== null && <div className="error">{error}</div>}
-      {loading && <div className="loading">Loading, please wait ...</div>}
+      {loading && (
+        <div className="loading">
+          Sending photo to the White House, please wait ...
+        </div>
+      )}
       {result !== null && (
         <>
           <div className="result">
