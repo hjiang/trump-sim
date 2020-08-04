@@ -5,6 +5,59 @@ import axios from "axios";
 
 import "./App.css";
 
+const makeImg = image => {
+  return new Promise((resolve, _reject) => {
+    const img = new Image();
+    img.onload = function() {
+      resolve(img);
+    };
+
+    img.src = URL.createObjectURL(image);
+  });
+};
+
+const downscaleDimension = ({ height, width }, limit) => {
+  if (height > width && height > limit) {
+    return { height: limit, width: width * (limit / height) };
+  } else if (width > height && width > limit) {
+    return { height: height * (limit / width), width: limit };
+  } else {
+    return { height, width };
+  }
+};
+
+const renameToJpg = fname => {
+  const pos = fname.lastIndexOf(".");
+  return fname.substr(0, pos < 0 ? fname.length : pos) + ".jpg";
+};
+
+const resizeImage = (image, maxDimension) => {
+  return new Promise((resolve, _reject) => {
+    makeImg(image).then(img => {
+      const newD = downscaleDimension(img, maxDimension);
+      const canvas = document.createElement("canvas");
+
+      canvas.width = newD.width;
+      canvas.height = newD.height;
+      const ctx = canvas.getContext("2d");
+
+      ctx.drawImage(img, 0, 0, newD.width, newD.height);
+      ctx.canvas.toBlob(
+        blob => {
+          resolve(
+            new File([blob], renameToJpg(image.name), {
+              type: "image/jpeg",
+              lastModified: Date.now()
+            })
+          );
+        },
+        "image/jpeg",
+        1
+      );
+    });
+  });
+};
+
 function App() {
   const [picture, setPicture] = useState(null);
   const [error, setError] = useState(null);
@@ -21,11 +74,13 @@ function App() {
   const onDrop = pics => {
     const pic = pics[0];
     setPicture(pic);
-    const formData = new FormData();
-    formData.append("image", pic, pic.name);
     setLoading(true);
-    axios
-      .post("/api/1.0/classify-image", formData)
+    resizeImage(pic, 512)
+      .then(smallPic => {
+        const formData = new FormData();
+        formData.append("image", smallPic, smallPic.name);
+        return axios.post("/api/1.0/classify-image", formData);
+      })
       .then(res => {
         if (res.status === 200) {
           setResult(res.data.result);
