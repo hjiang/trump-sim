@@ -79,7 +79,10 @@ function App() {
       .then(smallPic => {
         const formData = new FormData();
         formData.append("image", smallPic, smallPic.name);
-        return axios.post("/api/1.0/classify-image", formData);
+        return axios.post(
+          "https://trump-sim.avosapps.us/api/1.0/classify-image",
+          formData
+        );
       })
       .then(res => {
         if (res.status === 200) {
