@@ -42,18 +42,14 @@ const resizeImage = (image, maxDimension) => {
       const ctx = canvas.getContext("2d");
 
       ctx.drawImage(img, 0, 0, newD.width, newD.height);
-      ctx.canvas.toBlob(
-        blob => {
-          resolve(
-            new File([blob], renameToJpg(image.name), {
-              type: "image/jpeg",
-              lastModified: Date.now()
-            })
-          );
-        },
-        "image/jpeg",
-        1
-      );
+      ctx.canvas.toBlob(blob => {
+        resolve(
+          new File([blob], renameToJpg(image.name), {
+            type: "image/jpeg",
+            lastModified: Date.now()
+          })
+        );
+      }, "image/jpeg");
     });
   });
 };
