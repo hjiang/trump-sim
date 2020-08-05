@@ -45,8 +45,7 @@ const resizeImage = (image, maxDimension) => {
       ctx.canvas.toBlob(blob => {
         resolve(
           new File([blob], renameToJpg(image.name), {
-            type: "image/jpeg",
-            lastModified: Date.now()
+            type: "image/jpeg"
           })
         );
       }, "image/jpeg");
