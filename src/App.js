@@ -77,7 +77,7 @@ function App() {
         const formData = new FormData();
         formData.append("image", smallPic, smallPic.name);
         return axios.post(
-          "https://trump-sim.avosapps.us/api/1.0/classify-image",
+          "https://trump-sim-api.jishuq.com/api/1.0/classify-image",
           formData
         );
       })
