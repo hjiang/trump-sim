@@ -129,8 +129,7 @@ function App() {
         </>
       )}
       <div className="credit">
-        Hosted on <a href="https://netlify.com">Netlify</a> (frontend) and{" "}
-        <a href="https://leancloud.app">LeanCloud</a> (backend).
+        Hosted on <a href="https://leancloud.cn">LeanCloud</a>.
       </div>
     </div>
   );
