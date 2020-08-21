@@ -24,6 +24,9 @@
     "extends": "react-app"
   },
   "proxy": "http://localhost:3000",
+  "engines" : {
+    "node": ">=12"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
