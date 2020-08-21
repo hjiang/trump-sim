@@ -72,7 +72,7 @@ function App() {
     setError(null);
     setPicture(pic);
     setLoading(true);
-    resizeImage(pic, 512)
+    resizeImage(pic, 128)
       .then(smallPic => {
         const formData = new FormData();
         formData.append("image", smallPic, smallPic.name);
